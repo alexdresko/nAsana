@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nAsana.Core", "nAsana.Core\nAsana.Core.csproj", "{7B90D418-BE11-4015-B99C-9EEFD74BD2B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nAsana.Tests", "nAsana.Tests\nAsana.Tests.csproj", "{EA57E126-FBFA-41D2-97A0-068DC769603C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B90D418-BE11-4015-B99C-9EEFD74BD2B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B90D418-BE11-4015-B99C-9EEFD74BD2B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B90D418-BE11-4015-B99C-9EEFD74BD2B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B90D418-BE11-4015-B99C-9EEFD74BD2B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA57E126-FBFA-41D2-97A0-068DC769603C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA57E126-FBFA-41D2-97A0-068DC769603C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA57E126-FBFA-41D2-97A0-068DC769603C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA57E126-FBFA-41D2-97A0-068DC769603C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
