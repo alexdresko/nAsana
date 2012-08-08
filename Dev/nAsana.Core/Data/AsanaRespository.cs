@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace nAsana.Core.Data
+namespace Asana.Core.Data
 {
 	using System;
 	using System.Collections.Generic;

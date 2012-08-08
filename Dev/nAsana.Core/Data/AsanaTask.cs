@@ -1,4 +1,4 @@
-namespace nAsana.Core.Data
+namespace Asana.Core.Data
 {
 	using System;
 	using System.Collections.Generic;
@@ -16,29 +16,19 @@ namespace nAsana.Core.Data
 
 		#region Public Properties
 
-		public long assignee { get; set; }
+		public virtual long assignee { get; set; }
 
-		public string assignee_status { get; set; }
-
-		public bool completed { get; set; }
-
-		public DateTime? completed_at { get; set; }
-
-		public DateTime created_at { get; set; }
-
-		public DateTime? due_on { get; set; }
-
-		public List<AsanaFollower> followers { get; set; }
-
-		public DateTime modified_at { get; set; }
-
-		public string name { get; set; }
-
-		public string notes { get; set; }
-
-		public List<AsanaProject> projects { get; set; }
-
-		public long workspace { get; set; }
+		public virtual string assignee_status { get; set; }
+		public virtual bool completed { get; set; }
+		public virtual DateTime? completed_at { get; set; }
+		public virtual DateTime created_at { get; set; }
+		public virtual DateTime? due_on { get; set; }
+		public virtual List<AsanaFollower> followers { get; set; }
+		public virtual DateTime modified_at { get; set; }
+		public virtual string name { get; set; }
+		public virtual string notes { get; set; }
+		public virtual List<AsanaProject> projects { get; set; }
+		public virtual long workspace { get; set; }
 
 		#endregion
 	}
