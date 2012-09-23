@@ -15,14 +15,49 @@ namespace nAsana.Tests
 	[TestClass]
 	public class CastleTests
 	{
-		private static readonly ProxyGenerator _generator = new ProxyGenerator();
-
 		[TestMethod]
-		public void TestMethod1()
+		public void GetTask_IsIChangeable()
 		{
-			var task = _generator.CreateClassProxy<AsanaTask>(new StandardInterceptor(), new ChangeInterceptor());
+			var task = GetTask();
 			task.completed = true;
 
+			Assert.IsTrue(task is IChangeable);
+		}
+
+		[TestMethod]
+		public void GetTask_ByDefault_HasNoChanges()
+		{
+			var task = GetTask();
+			var change = task as IChangeable;
+
+			Assert.AreEqual(0, change.Changes.Count);
+			Assert.IsFalse(change.IsDirty);
+			Assert.IsTrue(change.TrackChanges);
+		}
+
+		[TestMethod]
+		public void ChangingProperty_CreatesChange()
+		{
+			var task = GetTask();
+			task.completed = true;
+			var change = task as IChangeable;
+
+			Assert.AreEqual(1, change.Changes.Count);
+			Assert.IsTrue(change.Changes.ContainsKey("completed"));
+			Assert.IsTrue((bool)change.Changes["completed"]);
+		}
+
+		private static AsanaTask GetTask()
+		{
+			//var options = new ProxyGenerationOptions();
+			//var changeable = new Changeable();
+			//options.AddMixinInstance(changeable);
+			//var task = Generator.Instance.CreateClassProxy<AsanaTask>(options, new ChangeInterceptor(changeable));
+			
+			//changeable.TrackChanges = true;
+			//return task;
+
+			return new AsanaTask();
 		}
 	}
 }

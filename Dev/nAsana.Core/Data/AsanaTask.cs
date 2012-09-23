@@ -3,6 +3,10 @@ namespace Asana.Core.Data
 	using System;
 	using System.Collections.Generic;
 
+	using Asana.Core.Proxy;
+
+	using Castle.DynamicProxy;
+
 	public class AsanaTask
 	{
 		#region Constructors and Destructors
@@ -10,6 +14,16 @@ namespace Asana.Core.Data
 		public AsanaTask()
 		{
 			this.followers = new List<AsanaFollower>();
+
+            //var options = new ProxyGenerationOptions();
+            //var changeable = new Changeable();
+            //options.AddMixinInstance(changeable);
+            //Generator.Instance.CreateClassProxyWithTarget(this, options, new ChangeInterceptor(changeable));
+			
+
+            //changeable.TrackChanges = true;
+
+
 		}
 
 		#endregion

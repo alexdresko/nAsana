@@ -15,24 +15,21 @@ namespace Asana.Core.Proxy
 	/// <summary>
 	/// 	TODO: Update summary.
 	/// </summary>
-	public class ChangeInterceptor : IInterceptor, IChangeable
+	public class ChangeInterceptor : IInterceptor
 	{
+		public Changeable Changeable { get; set; }
+
 		#region Constructors and Destructors
 
-		public ChangeInterceptor()
+		public ChangeInterceptor(Changeable changeable)
 		{
-			this.Changes = new Dictionary<string, object>();
+			Changeable = changeable;
 		}
 
 		#endregion
 
 		#region Public Properties
 
-		public Dictionary<string, object> Changes { get; set; }
-
-		public bool IsDirty { get; set; }
-
-		public bool TrackChanges { get; set; }
 
 		#endregion
 
@@ -42,7 +39,7 @@ namespace Asana.Core.Proxy
 
 		public void Intercept(IInvocation invocation)
 		{
-			if (this.TrackChanges)
+			if (this.Changeable.TrackChanges)
 			{
 				const string SetPrefix = "set_";
 				if (invocation.Method.Name.StartsWith(SetPrefix, StringComparison.OrdinalIgnoreCase)
@@ -50,17 +47,13 @@ namespace Asana.Core.Proxy
 				{
 					var name = invocation.Method.Name.Substring(SetPrefix.Length);
 					var value = invocation.Arguments[0];
-					this.Changes[name] = value;
+					this.Changeable.Changes[name] = value;
 				}
 			}
 
 			invocation.Proceed();
 		}
 
-		public void Reset()
-		{
-			this.Changes.Clear();
-		}
 
 		#endregion
 	}
