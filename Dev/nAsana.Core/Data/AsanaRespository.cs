@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace nAsana.Core.Data
+namespace Asana.Core.Data
 {
 	using System;
 	using System.Collections.Generic;
@@ -45,17 +45,18 @@ namespace nAsana.Core.Data
 
 		public AsanaResponse<AsanaProject> CreateProject(AsanaWorkspace workspace, AsanaProject newProject)
 		{
-			return UseRequest<AsanaProject>(
-				GetWorkspaceProjectsUrl(workspace.id), 
-				request =>
-					{
-						newProject.workspaceid = workspace.id;
-						request.Method = Method.POST;
-						request.AddObject(newProject);
-					});
+		    var var = UseRequest<AsanaProject>(GetWorkspaceProjectsUrl(workspace.id), request =>
+		        {
+		            newProject.workspaceid = workspace.id;
+		            request.Method = Method.POST;
+		            request.AddObject(newProject);
+		            request.Parameters.RemoveAll(p => p.Name.ToLower() == "followers");
+		        });
+
+		    return var;
 		}
 
-		public List<AsanaNavigation> GetAsanaNav()
+	    public List<AsanaNavigation> GetAsanaNav()
 		{
 			var workspaces = this.GetWorkspaces();
 			var results =
@@ -149,12 +150,23 @@ namespace nAsana.Core.Data
 				string.Format("projects/{0}", projectToUpdate.id), 
 				request =>
 					{
-						request.AddObject(projectToUpdate);
-						request.Method = Method.PUT;
+                        if (WorkspaceIdNotSpecifiedButCanBeFound(projectToUpdate))
+                        {
+                            projectToUpdate.workspaceid = projectToUpdate.workspace.id;
+                        }
+
+					    request.AddObject(projectToUpdate);
+					    request.Parameters.RemoveAll(p => (new[] { "workspace", "followers" }).Contains(p.Name.ToLower()));
+					    request.Method = Method.PUT;
 					});
 		}
 
-		#endregion
+	    private static bool WorkspaceIdNotSpecifiedButCanBeFound(AsanaProject projectToUpdate)
+	    {
+	        return projectToUpdate.workspaceid == 0 && projectToUpdate.workspace != null && projectToUpdate.workspace.id > 0;
+	    }
+
+	    #endregion
 
 		#region Methods
 
@@ -169,6 +181,12 @@ namespace nAsana.Core.Data
 			client.Authenticator = new HttpBasicAuthenticator(ApiKey, string.Empty);
 			var request = new RestRequest(resource);
 			action(request);
+
+            if (request.Method == Method.PUT)
+            {
+                request.Parameters.RemoveAll(p => (new[] { "created_at", "modified_at" }).Contains(p.Name.ToLower()));
+            }
+
 			var content = client.Execute(request);
 			var response = new AsanaResponse<T>
 				{

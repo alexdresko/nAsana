@@ -1,4 +1,4 @@
-namespace nAsana.Core.Data
+namespace Asana.Core.Data
 {
 	using System;
 	using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace nAsana.Core.Data
 		public AsanaProject()
 		{
 			this.Tasks = new List<AsanaTask>();
-			this.followers = new List<AsanaFollower>();
+            this.followers = new List<AsanaFollower>();
 		}
 
 		#endregion

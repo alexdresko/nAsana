@@ -1,4 +1,4 @@
-namespace nAsana.Core.Data
+namespace Asana.Core.Data
 {
 	public class AsanaUser
 	{
