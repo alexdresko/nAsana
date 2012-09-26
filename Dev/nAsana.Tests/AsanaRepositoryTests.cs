@@ -7,9 +7,9 @@ namespace nAsana.Tests
 	using System.Linq;
 	using System.Net;
 
-	using Microsoft.VisualStudio.TestTools.UnitTesting;
+	using Asana.Core.Data;
 
-	using nAsana.Core.Data;
+	using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 	/// <summary>
 	/// 	Summary description for AsanaRepositoryTests
