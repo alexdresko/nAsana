@@ -10,7 +10,7 @@ namespace Asana.Core.Data
 		public AsanaProject()
 		{
 			this.Tasks = new List<AsanaTask>();
-			this.followers = new List<AsanaFollower>();
+            this.followers = new List<AsanaFollower>();
 		}
 
 		#endregion

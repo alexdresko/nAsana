@@ -49,15 +49,15 @@ namespace nAsana.Tests
 
 		private static AsanaTask GetTask()
 		{
-			//var options = new ProxyGenerationOptions();
-			//var changeable = new Changeable();
-			//options.AddMixinInstance(changeable);
-			//var task = Generator.Instance.CreateClassProxy<AsanaTask>(options, new ChangeInterceptor(changeable));
-			
-			//changeable.TrackChanges = true;
-			//return task;
+            var options = new ProxyGenerationOptions();
+            var changeable = new Changeable();
+            options.AddMixinInstance(changeable);
+            var task = Generator.Instance.CreateClassProxy<AsanaTask>(options, new ChangeInterceptor(changeable));
 
-			return new AsanaTask();
+            changeable.TrackChanges = true;
+            return task;
+
+            //return new AsanaTask();
 		}
 	}
 }
